@@ -17,9 +17,16 @@ key.addEventListener('click', function(e){
     let input = e.target.textContent;
     let tmpNum = Number(input)
 
-    if(input != 'Delete' && input != 'Exponential')
+    if(input != 'Delete')
     {
-        data.exp += input;
+        if(input == 'Exponential')
+        {
+            data.exp += '^'
+        }
+        else{
+            data.exp += input;
+        }
+        
     }
     
     
@@ -96,6 +103,11 @@ key.addEventListener('click', function(e){
             divide(tempNum);
         }
         
+        else if (data.operators[x-1] == 'Exponential')
+        {
+            expo(tempNum);
+        }
+
         if (input != '=')
         {
             data.operators.push(input);
@@ -107,7 +119,7 @@ key.addEventListener('click', function(e){
         if (input == '=')
         {
             data.exp = data.total
-            if (data.operators[x-1] == '÷' || data.operators[x-1] == 'X')
+            if (data.operators[x-1] == '÷' || data.operators[x-1] == 'X' || data.operators == 'Exponential')
             {
                 data.tmpNumStr = '1';
             }
@@ -149,3 +161,6 @@ function divide(num) {
     data.total = data.total/ num;
 }
 
+function expo(num) {
+    data.total = data.total ** num;
+}
