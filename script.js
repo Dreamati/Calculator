@@ -9,6 +9,7 @@ let data = {
     tempNum: 0,
     tmpNumStr: '',
     exp: '',
+    lastEqual: false,
     
 }
 
@@ -16,6 +17,7 @@ key.addEventListener('click', function(e){
     
     let input = e.target.textContent;
     let tmpNum = Number(input)
+    
 
     if(input != 'Delete')
     {
@@ -36,18 +38,21 @@ key.addEventListener('click', function(e){
 
     if(tmpNum >= 0 || input == '.')
     {
-        data.tmpNumStr += input;
-        console.log(data.tmpNumStr)
+        if(data.lastEqual)
+        {
+            clear();
+            
+        }
+        else{
+            data.tmpNumStr += input;
+            console.log(data.tmpNumStr)
+        }
+        
     }
 
     else if (input == 'Clear')
     {
-        data.operands = [];
-        data.operators = [];
-        data.total = 0;
-        data.tempNum = 0;
-        data.tmpNumStr = '';
-        data.exp =''
+            clear();
     }
 
     else if (input =='Delete')
@@ -68,7 +73,7 @@ key.addEventListener('click', function(e){
     else 
     {
         
-        
+        data.lastEqual = false;
         let tempNum = Number(data.tmpNumStr);
 
         if(data.tmpNumStr != '')
@@ -123,16 +128,18 @@ key.addEventListener('click', function(e){
             {
                 data.tmpNumStr = '1';
             }
+            data.lastEqual = true;
         }
+    
         
         
         
         
     }
-    if (data.operands.length < data.operators.length && data.operators[x - 1] != '=')
+    if (data.operands.length < data.operators.length  && data.operators[x - 1] != '=')
         {
             console.log('ERROR');
-            resultDisplay.textContent = 'ERROR! Clear To Continue';
+            resultDisplay.textContent = 'SYNTAX ERROR! ';
 
         }
     else {
@@ -163,4 +170,13 @@ function divide(num) {
 
 function expo(num) {
     data.total = data.total ** num;
+}
+function clear() {
+    data.operands = [];
+    data.operators = [];
+    data.total = 0;
+    data.tempNum = 0;
+    data.tmpNumStr = '';
+    data.exp =''
+    data.lastEqual = false;
 }
