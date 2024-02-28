@@ -1,5 +1,6 @@
 let key = document.querySelector('.keys');
-let resultDisplay = document.querySelector('.displayResult')
+let resultDisplay = document.querySelector('.displayResult');
+let displayExp = document.querySelector('.displayExp');
 
 let data = {
     operands: [],
@@ -7,13 +8,16 @@ let data = {
     total: 0,
     tempNum: 0,
     tmpNumStr: '',
+    exp: '',
     
 }
 
 key.addEventListener('click', function(e){
+    
     let input = e.target.textContent;
     let tmpNum = Number(input)
-
+    data.exp += input;
+    
     
     
     let x = data.operators.length;
@@ -33,6 +37,7 @@ key.addEventListener('click', function(e){
         data.total = 0;
         data.tempNum = 0;
         data.tmpNumStr = '';
+        data.exp =''
     }
 
     else if (input =='Delete')
@@ -50,9 +55,9 @@ key.addEventListener('click', function(e){
 
     else 
     {
-        if (input != '=')
-        {
-            let tempNum = Number(data.tmpNumStr);
+        
+        
+        let tempNum = Number(data.tmpNumStr);
 
         if(data.tmpNumStr != '')
         {
@@ -79,18 +84,29 @@ key.addEventListener('click', function(e){
 
         else if (data.operators[x-1] == 'X')
         {
-            multiply(tempNum);
+            multiply(tempNum);    
         }
         else if (data.operators[x-1] == '÷')
         {
             divide(tempNum);
         }
         
-        data.operators.push(input);
+        if (input != '=')
+        {
+            data.operators.push(input);
+        }
         console.log(data.operators);
         console.log(data.total)
         data.tmpNumStr = '';
+
+        if (input == '=')
+        {
+            data.exp = data.total
+            data.tmpNumStr = 
         }
+        
+        
+        
         
     }
     if (data.operands.length < data.operators.length && data.operators[x - 1] != '=')
@@ -101,6 +117,7 @@ key.addEventListener('click', function(e){
         }
     else {
         resultDisplay.textContent = data.total;
+        displayExp.textContent = data.exp;
     }
     
 
@@ -121,5 +138,6 @@ function multiply(num) {
 }
 
 function divide(num) {
-    data.total /= num;
+    data.total = data.total/ num;
 }
+

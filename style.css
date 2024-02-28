@@ -44,4 +44,8 @@ h1 {
 }
 .displayExp {
     flex: 3;
+    text-align: end;
+    font-size: large;
+    margin: 10px;
+
 }
