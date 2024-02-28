@@ -16,8 +16,11 @@ key.addEventListener('click', function(e){
     
     let input = e.target.textContent;
     let tmpNum = Number(input)
-    data.exp += input;
-    
+
+    if(input != 'Delete' && input != 'Exponential')
+    {
+        data.exp += input;
+    }
     
     
     let x = data.operators.length;
@@ -42,6 +45,8 @@ key.addEventListener('click', function(e){
 
     else if (input =='Delete')
     {
+        data.exp = data.exp.slice(0, -1);
+
         if(data.tmpNumStr)
         {
             data.tmpNumStr = data.tmpNumStr.slice(0, -1);
