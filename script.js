@@ -35,8 +35,13 @@ key.addEventListener('click', function(e){
     let x = data.operators.length;
 
         
-
-    if(tmpNum >= 0 || input == '.')
+    if (input == '-' && data.tmpNumStr == '')
+    {
+        data.tmpNumStr = '-';
+    }
+    else
+    {
+        if(tmpNum >= 0 || input == '.')
     {
         if(data.lastEqual)
         {
@@ -136,6 +141,8 @@ key.addEventListener('click', function(e){
         
         
     }
+    }
+    
     if (data.operands.length < data.operators.length  && data.operators[x - 1] != '=')
         {
             console.log('ERROR');
