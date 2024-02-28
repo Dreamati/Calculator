@@ -102,7 +102,10 @@ key.addEventListener('click', function(e){
         if (input == '=')
         {
             data.exp = data.total
-            data.tmpNumStr = 
+            if (data.operators[x-1] == '÷' || data.operators[x-1] == 'X')
+            {
+                data.tmpNumStr = '1';
+            }
         }
         
         
